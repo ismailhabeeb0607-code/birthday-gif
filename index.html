@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    padding: 25px;
+    width: 100%;
+}
+
+h1 {
+    font-size: clamp(2.2rem, 8vw, 4rem);
+    text-shadow: 0 0 20px #fff;
+    animation: glow 2s infinite alternate;
+}
+
+h2 {
+    margin: 18px 0;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    animation: pop 1.5s infinite;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-top: 12px;
+}
+
+.cake {
+    font-size: 100px;
+    margin: 25px 0;
+    animation: bounce 1.5s infinite;
+}
+
+button {
+    border: none;
+    padding: 14px 25px;
+    border-radius: 30px;
+    background: #fff;
+    color: #ff4081;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    box-shadow: 0 5px 15px #a83d78;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 60px;
+    height: 75px;
+    border-radius: 50%;
+    animation: float 9s linear infinite;
+    opacity: 0.85;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 29px;
+    height: 28px;
+    border-left: 2px solid white;
+}
+
+.b1 { left: 8%; background: #ffeb3b; animation-delay: 0s; }
+.b2 { left: 25%; background: #00e5ff; animation-delay: 2s; }
+.b3 { left: 70%; background: #ff1744; animation-delay: 1s; }
+.b4 { left: 88%; background: #76ff03; animation-delay: 3s; }
+.b5 { left: 48%; background: #ff9800; animation-delay: 4s; }
+
+.confetti {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 16px;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 30px #fff, 0 0 50px #ffeb3b; }
+}
+
+@keyframes pop {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0); }
+    100% { transform: translateY(-125vh) rotate(20deg); }
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0); }
+    100% { transform: translateY(120vh) rotate(720deg); }
+}
+
+@media (max-width: 480px) {
+    .cake { font-size: 75px; }
+    .balloon { transform: scale(.8); }
+    p { font-size: 1rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="balloon b1"></div>
+<div class="balloon b2"></div>
+<div class="balloon b3"></div>
+<div class="balloon b4"></div>
+<div class="balloon b5"></div>
+
+<div class="container">
+    <h1>🎉 Happy Birthday! 🎉</h1>
+    <h2 id="name">A Special Day for You! 💖</h2>
+
+    <div class="cake">🎂</div>
+
+    <p>Wishing you endless happiness, love and success!</p>
+    <p>✨ May all your dreams come true! ✨</p>
+
+    <button onclick="celebrate()">🎁 Celebrate!</button>
+</div>
+
+<script>
+function celebrate() {
+    for (let i = 0; i < 100; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.backgroundColor =
+            ["#ffeb3b", "#00e5ff", "#ff1744",
+             "#76ff03", "#ffffff", "#ff9800"]
+            [Math.floor(Math.random() * 6)];
+
+        piece.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => piece.remove(), 6000);
+    }
+
+    document.getElementById("name").textContent =
+        "🎊 Let's Party! You Are Amazing! 🎊";
+}
+</script>
+
+</body>
+</html>
